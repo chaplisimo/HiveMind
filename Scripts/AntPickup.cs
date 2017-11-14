@@ -10,6 +10,13 @@ public class AntPickup : MonoBehaviour {
       inventory.Add(other.gameObject);
       other.transform.parent = gameObject.transform;
       other.gameObject.SetActive(false);
-    }
+    }else 
+      if(other.CompareTag("Queen")){
+        other.gameObject.GetComponent<QueenController>().FeedResources(inventory.Count);
+        for(GameObject gO : inventory){
+          inventory.Remove(gO);
+          Destroy(gO); 
+        }
+      }
   }
 }
