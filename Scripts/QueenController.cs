@@ -27,7 +27,7 @@ public class QueenController : MonoBehaviour {
     }
   }
   
-  void FeedResources(int resources){
+  public void FeedResources(int resources){
     resourcesLeft += resources;
     if(resourcesLeft >= antResourcesCost && !isBreeding){
       isBreeding = true;
