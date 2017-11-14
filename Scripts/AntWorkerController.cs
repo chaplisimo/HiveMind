@@ -2,8 +2,8 @@ using UnityEngine;
 
 public class AntWorkerController : MonoBehaviour {
   
-  delegate void AntCommand();
-  public static AntCommand OnAntCommand;
+  public delegate void AntCommand();
+  public static event AntCommand OnAntCommand;
   
   void Update(){
     if(Input.GetButton("Fire2")){

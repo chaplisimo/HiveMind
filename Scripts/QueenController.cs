@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 
 public class QueenController : MonoBehaviour {
   
@@ -16,20 +17,19 @@ public class QueenController : MonoBehaviour {
   }
   
   IEnumerator BreedAnts(){
-    if(resourcesLeft >= antResourcesCost){
-      resources -= antResourcesCost;
-      GameObject newAnt = GameObject.Instantiate(antPrefab,transform.postion, transform.rotation);
-      yield return WaitForSeconds(breedTime);
+    if(resourcesLeft >= antResourceCost){
+      resourcesLeft -= antResourceCost;
+      GameObject newAnt = GameObject.Instantiate(antPrefab,transform.position, transform.rotation);
+      yield return new WaitForSeconds(breedTime);
     } else {
-      StopCoroutine(BreedAnts);
-      isBreeding = false;
-      return null;
+	  isBreeding = false;
+      StopCoroutine("BreedAnts");
     }
   }
   
   public void FeedResources(int resources){
     resourcesLeft += resources;
-    if(resourcesLeft >= antResourcesCost && !isBreeding){
+    if(resourcesLeft >= antResourceCost && !isBreeding){
       isBreeding = true;
       StartCoroutine(BreedAnts());
     }

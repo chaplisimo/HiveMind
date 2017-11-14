@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEditor;
 
 [RequireComponent(typeof(Rigidbody))]
 public class AntMovement : MonoBehaviour {
@@ -46,7 +47,7 @@ public class AntMovement : MonoBehaviour {
 		Quaternion newRotation = transform.rotation;
 		
 		if(newPosition.magnitude != 0){
-			 targetRotation = Quaternion.LookRotation(newPosition);
+			 targetRotation = Quaternion.LookRotation(newPosition,transform.up);
 			 newRotation = Quaternion.RotateTowards(transform.rotation,targetRotation, turningRate * Time.deltaTime);
 		}
 	#endif

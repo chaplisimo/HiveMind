@@ -1,13 +1,14 @@
 using UnityEngine;
+using UnityEngine.AI;
 
 public class WorkerController : MonoBehaviour {
   
-  NavMeshAgent navMeshAgent;
+  UnityEngine.AI.NavMeshAgent navMeshAgent;
   Transform player;
   
   void Awake(){
     navMeshAgent = GetComponent<NavMeshAgent>();
-    player = FindWithTag("Player").transform;
+    player = GameObject.FindWithTag("Player").transform;
   }
   
   void Start(){

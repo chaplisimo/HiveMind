@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections.Generic;
 
 public class AntPickup : MonoBehaviour {
   
@@ -13,7 +14,7 @@ public class AntPickup : MonoBehaviour {
     }else 
       if(other.CompareTag("Queen")){
         other.gameObject.GetComponent<QueenController>().FeedResources(inventory.Count);
-        for(GameObject gO : inventory){
+        foreach(GameObject gO in inventory){
           inventory.Remove(gO);
           Destroy(gO); 
         }
