@@ -39,7 +39,7 @@ public class AntMovement : MonoBehaviour {
 		float hMove = Input.GetAxisRaw("Horizontal");
 		float vMove = Input.GetAxisRaw("Vertical");
 	
-		newPosition = new Vector3(hMove,vMove,0f);
+		newPosition = new Vector3(0f,vMove,-hMove);
 		newPosition *= speed * Time.deltaTime;
 		
 		
@@ -48,7 +48,9 @@ public class AntMovement : MonoBehaviour {
 		
 		if(newPosition.magnitude != 0){
 			 targetRotation = Quaternion.LookRotation(newPosition,transform.up);
+			 //targetRotation = Quaternion.Euler(new Vector3(180*hMove,0f,90*Mathf.Abs(vMove))* Time.deltaTime * turningRate);
 			 newRotation = Quaternion.RotateTowards(transform.rotation,targetRotation, turningRate * Time.deltaTime);
+			 //newRotation *= targetRotation;
 		}
 	#endif
 		
@@ -58,15 +60,15 @@ public class AntMovement : MonoBehaviour {
 	
 	void OnTriggerEnter(Collider other){
 		
-		if(other.CompareTag("Anthive")){
+		/*if(other.CompareTag("Anthive")){
 			canClimb = true;
-		}
+		}*/
 	}
 	
 	 void OnTriggerExit(Collider other){
 		
-		if(other.CompareTag("Anthive")){
+		/*if(other.CompareTag("Anthive")){
 			canClimb = false;
-		}
+		}*/
 	}
 }
