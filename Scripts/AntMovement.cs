@@ -42,20 +42,15 @@ public class AntMovement : MonoBehaviour {
 		newPosition = new Vector3(0f,vMove,-hMove);
 		newPosition *= speed * Time.deltaTime;
 		
-		
-		Quaternion targetRotation = transform.rotation;
-		Quaternion newRotation = transform.rotation;
-		
-		if(newPosition.magnitude != 0){
-			 targetRotation = Quaternion.LookRotation(newPosition,transform.up);
-			 //targetRotation = Quaternion.Euler(new Vector3(180*hMove,0f,90*Mathf.Abs(vMove))* Time.deltaTime * turningRate);
-			 newRotation = Quaternion.RotateTowards(transform.rotation,targetRotation, turningRate * Time.deltaTime);
-			 //newRotation *= targetRotation;
+		if(newPosition.magnitude > 0){
+			Quaternion rotation = Quaternion.FromToRotation(Vector3.forward,newPosition.normalized);
+			transform.rotation = Quaternion.RotateTowards(transform.rotation, rotation, Time.deltaTime * turningRate);
 		}
+		
 	#endif
 		
-		rb.MovePosition(transform.position + newPosition);
-		rb.MoveRotation(newRotation);		
+		rb.MovePosition(newPosition + rb.position);
+		//rb.MoveRotation(Quaternion.Euler(vectorRotation));		
 	}
 	
 	void OnTriggerEnter(Collider other){
