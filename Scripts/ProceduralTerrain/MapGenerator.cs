@@ -147,54 +147,15 @@ public class MapGenerator : MonoBehaviour {
 
 		for (int neighbourX = x ; neighbourX <= x + 1; neighbourX ++) {
 			for (int neighbourY = y ; neighbourY <= y + 1; neighbourY ++) {
-				//if (neighbourX > 0 && neighbourX < height-1 && neighbourY > 0 && neighbourY < width-1) {
-					if(neighbourX <= x && neighbourY <= y && map[neighbourX,neighbourY]==1 ){
-						if(neighbourX <= 0 || neighbourY <= 0){
-							binary |= neighbourX <= 0?0x3:0x0 | neighbourY <= 0? 0x9 : 0x0;// 0001 | 0010
-						}else{
-							binary |= 0x1;
-						}
-					}else if(neighbourX > x && neighbourY <= y && map[neighbourX,neighbourY]==1 ){
-						if(neighbourX >= height-1 || neighbourY <= 0){
-							binary |= neighbourX <= 0?0xC:0x0 | neighbourY <= 0? 0x9 : 0x0;// 0001 | 0010
-						}else{
-							binary |= 0x2;
-						}
-					}else if(neighbourX > x && neighbourY > y && map[neighbourX,neighbourY]==1 ){
-						if(neighbourX >= height-1 || neighbourY >= width-1){
-							binary |= neighbourX <= 0?0xC:0x0 | neighbourY <= 0? 0x6 : 0x0;// 0001 | 0010
-						}else{
-							binary |= 0x4;
-						}
-					}else if(neighbourX <= x && neighbourY > y && map[neighbourX,neighbourY]==1 ){
-						if(neighbourX  <= 0 || neighbourY >= width-1){
-							binary |= neighbourX <= 0?0x3:0x0 | neighbourY <= 0? 0x6 : 0x0;// 0001 | 0010
-						}else{
-							binary |= 0x8;
-						}
-					}
-				/*}else{
-					if(neighbourX <= x && neighbourY <= y && map[neighbourX,neighbourY]==1 ){
-						binary |= 0x1;
-					}else if(neighbourX > x && neighbourY <= y && map[neighbourX,neighbourY]==1 ){
-						binary |= 0x2;
-					}else if(neighbourX > x && neighbourY > y && map[neighbourX,neighbourY]==1 ){
-						binary |= 0x4;
-					}else if(neighbourX <= x && neighbourY > y && map[neighbourX,neighbourY]==1 ){
-						binary |= 0x8;
-					}
-					
-					if (neighbourX <= 0){
-						binary |= 0x3;// 0001 | 0010
-					}else if (neighbourX >= height-1){
-						binary |= 0xC;// 1000 | 0100
-					}
-					if(neighbourY <= 0){
-						binary |= 0x9;// 1000 | 0001 
-					}else if(neighbourY >= width-1){
-						binary |= 0x6;// 0100 | 0010 
-					}
-				}*/
+				if(neighbourX == x && neighbourY == y && map[neighbourX][neighbourY]==1 ){
+					binary |= 0x1;
+				}else if(neighbourX > x && neighbourY == y && map[neighbourX][neighbourY]==1 ){
+					binary |= 0x8;
+				}else if(neighbourX > x && neighbourY > y && map[neighbourX][neighbourY]==1 ){
+					binary |= 0x4;
+				}else if(neighbourX == x && neighbourY > y && map[neighbourX][neighbourY]==1 ){
+					binary |= 0x2;
+				}
 			}
 		}
 		return binary;
