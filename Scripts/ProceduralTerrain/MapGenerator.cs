@@ -97,7 +97,6 @@ public class MapGenerator : MonoBehaviour {
 		for(int i=0; i<width; i++){
 			for(int j=0; j<height; j++){
 				GameObject p = Instantiate(prefab ,transform.position  +  new Vector3(resolution * i,resolution * j,0),transform.rotation);
-				Debug.Log(msqrs[i,j] == 15);
 				switch (msqrs[i,j]){
 					case 0 :  {p.GetComponent<SpriteRenderer>().sprite = marchSquares[0];break;}
 					case 1 :  {p.GetComponent<SpriteRenderer>().sprite = marchSquares[1];break;}
@@ -118,7 +117,6 @@ public class MapGenerator : MonoBehaviour {
 					default : {Debug.Log("Not matched");break;}
 				}            
 			}
-			//Debug.Log("\n");
 		}
 	}
 
