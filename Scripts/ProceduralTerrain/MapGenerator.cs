@@ -25,6 +25,9 @@ public class MapGenerator : MonoBehaviour {
 
 	void Update() {
 		if (Input.GetMouseButtonDown(0)) {
+			for(int i = 0;i<transform.childCount;i++){
+				Destroy(transform.GetChild(i).gameObject);
+			}
 			GenerateMap();
 		}
 	}
@@ -94,8 +97,8 @@ public class MapGenerator : MonoBehaviour {
 	}
 
 	void TriangleMeshes(){
-		for(int i=0; i<width; i++){
-			for(int j=0; j<height; j++){
+		for(int i=0; i<width-1; i++){
+			for(int j=0; j<height-1; j++){
 				GameObject p = Instantiate(prefab ,transform.position  +  new Vector3(resolution * i,resolution * j,0),transform.rotation);
 				switch (msqrs[i,j]){
 					case 0 :  {p.GetComponent<SpriteRenderer>().sprite = marchSquares[0];break;}
@@ -115,7 +118,8 @@ public class MapGenerator : MonoBehaviour {
 					case 14 : {p.GetComponent<SpriteRenderer>().sprite = marchSquares[14];break;}
 					case 15 : {p.GetComponent<SpriteRenderer>().sprite = marchSquares[15];break;}
 					default : {Debug.Log("Not matched");break;}
-				}            
+				} 
+				p.transform.parent = this.transform;
 			}
 		}
 	}
@@ -145,14 +149,14 @@ public class MapGenerator : MonoBehaviour {
 
 		for (int neighbourX = x ; neighbourX <= x + 1; neighbourX ++) {
 			for (int neighbourY = y ; neighbourY <= y + 1; neighbourY ++) {
-				if(neighbourX == x && neighbourY == y && map[neighbourX][neighbourY]==1 ){
+				if(neighbourX == x && neighbourY == y && map[neighbourX,neighbourY]==1 ){
 					binary |= 0x1;
-				}else if(neighbourX > x && neighbourY == y && map[neighbourX][neighbourY]==1 ){
-					binary |= 0x8;
-				}else if(neighbourX > x && neighbourY > y && map[neighbourX][neighbourY]==1 ){
-					binary |= 0x4;
-				}else if(neighbourX == x && neighbourY > y && map[neighbourX][neighbourY]==1 ){
+				}else if(neighbourX > x && neighbourY == y && map[neighbourX,neighbourY]==1 ){
 					binary |= 0x2;
+				}else if(neighbourX > x && neighbourY > y && map[neighbourX,neighbourY]==1 ){
+					binary |= 0x4;
+				}else if(neighbourX == x && neighbourY > y && map[neighbourX,neighbourY]==1 ){
+					binary |= 0x8;
 				}
 			}
 		}
