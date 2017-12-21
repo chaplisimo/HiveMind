@@ -17,20 +17,20 @@ public static class AnthiveMetrics {
 	};
 	
 	public static Vector3[] corners_2 = {
-		new Vector3(0f, 0f, outerRadius),
-		new Vector3(innerRadius, 0f, 0.5f * outerRadius),
-		new Vector3(-innerRadius, 0f, 0.5f * outerRadius),
-		
-		new Vector3(-innerRadius, 0f, 0.5f * outerRadius),
-		new Vector3(innerRadius, 0f, 0.5f * outerRadius),
-		new Vector3(innerRadius, 0f, -0.5f * outerRadius),
-		
-		new Vector3(innerRadius, 0f, -0.5f * outerRadius),
-		new Vector3(-innerRadius, 0f, -0.5f * outerRadius),
-		new Vector3(-innerRadius, 0f, 0.5f * outerRadius),
-		
-		new Vector3(innerRadius, 0f, -0.5f * outerRadius),
-		new Vector3(0f, 0f, -outerRadius),
-		new Vector3(-innerRadius, 0f, -0.5f * outerRadius)
+		new Vector3(0f, outerRadius, 0f),
+		new Vector3(0f, 0.5f * outerRadius, innerRadius),
+		new Vector3(0f, 0.5f * outerRadius,-innerRadius),
+
+		new Vector3(0f, 0.5f * outerRadius, -innerRadius),
+		new Vector3(0f, 0.5f * outerRadius, innerRadius ),
+		new Vector3(0f, -0.5f * outerRadius, innerRadius ),
+
+		new Vector3(0f,-0.5f * outerRadius , innerRadius  ),
+		new Vector3(0f, -0.5f * outerRadius, -innerRadius),
+		new Vector3(0f, 0.5f * outerRadius , -innerRadius),
+
+		new Vector3(0f, -0.5f * outerRadius, innerRadius),
+		new Vector3(0f, -outerRadius, 0f),
+		new Vector3(0f, -0.5f * outerRadius, -innerRadius )
 	};
 }

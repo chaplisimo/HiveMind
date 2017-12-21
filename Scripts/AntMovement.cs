@@ -39,7 +39,7 @@ public class AntMovement : MonoBehaviour {
 		float hMove = Input.GetAxisRaw("Horizontal");
 		float vMove = Input.GetAxisRaw("Vertical");
 	
-		newPosition = new Vector3(0f,vMove,-hMove);
+		newPosition = new Vector3(0f,vMove,hMove);
 		newPosition *= speed * Time.deltaTime;
 		
 		if(newPosition.magnitude > 0){

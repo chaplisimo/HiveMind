@@ -4,7 +4,7 @@ using UnityEditor;
 [RequireComponent(typeof(Rigidbody))]
 public class AntClimbWall : MonoBehaviour {
 	
-	Rigidbody rb;
+	/*Rigidbody rb;
 	
 	public float speed = 4;
 	public float turningRate = 30;
@@ -82,6 +82,6 @@ public class AntClimbWall : MonoBehaviour {
 		Quaternion newRotation = Quaternion.RotateTowards(transform.rotation,vectorRotation,turningRate *Time.deltaTime);
 		
 		return newRotation;
-	}
+	}*/
 	
 }

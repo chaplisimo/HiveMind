@@ -1,5 +1,5 @@
 using UnityEngine;
 
-public class TerrainCell {
+public class TerrainCell : MonoBehaviour{
 
 }

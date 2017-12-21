@@ -15,7 +15,7 @@ public class AnthiveMesh : MonoBehaviour {
 		triangles = new List<int>();
 	}
 	
-	public void Triangulate (HexCell[] cells) {
+	public void Triangulate (TerrainCell[] cells) {
 		hexMesh.Clear();
 		vertices.Clear();
 		triangles.Clear();
@@ -27,7 +27,7 @@ public class AnthiveMesh : MonoBehaviour {
 		hexMesh.RecalculateNormals();
 	}
 	
-	void Triangulate (HexCell cell) {
+	void Triangulate (TerrainCell cell) {
 		Vector3 center = cell.transform.localPosition;
 		/*for (int i = 0; i < 6; i++) {
 			AddTriangle(
@@ -36,11 +36,11 @@ public class AnthiveMesh : MonoBehaviour {
 				center + HexMetrics.corners[i + 1]
 			);
 		}*/
-		for(int i=0; i < HexMetrics.corners_2.Length; i++){
+		for(int i=0; i < AnthiveMetrics.corners_2.Length; i++){
 			AddTriangle(
-				center + HexMetrics.corners_2[i],
-				center + HexMetrics.corners_2[++i],
-				center + HexMetrics.corners_2[++i]
+				center + AnthiveMetrics.corners_2[i],
+				center + AnthiveMetrics.corners_2[++i],
+				center + AnthiveMetrics.corners_2[++i]
 			);
 		}
 	}
