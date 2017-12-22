@@ -12,8 +12,14 @@ public class AntMovement : MonoBehaviour {
 	
 	bool canClimb = false;
 	
+	Vector2 targetPosition;
+	//MIGRAR por otra cosa tal vez
+	MapPathfinder mapPathfinder;
+	
 	void Start(){
 		rb = GetComponent<Rigidbody>();
+		//SINGLETON TAL VEZ O SCRIPTABLE OBJECTS
+		mapPathfinder = GameObject.FindWithTag("Respawn").GetComponent<MapPathfinder>();
 	}
 	
 	void FixedUpdate(){
@@ -27,6 +33,7 @@ public class AntMovement : MonoBehaviour {
 			
 			if(touch.phase == TouchPhase.Began){
 				//TODO RayCast to check if touch is in head
+				targetPosition = mapPathfinder.GetTargetPosition();
 				
 			}else if(touch.phase == TouchPhase.Moved){
 				//TODO RayCast to check if touch is in head
@@ -36,22 +43,28 @@ public class AntMovement : MonoBehaviour {
 		}
 	#else
 		
-		float hMove = Input.GetAxisRaw("Horizontal");
-		float vMove = Input.GetAxisRaw("Vertical");
-	
-		newPosition = new Vector3(0f,vMove,hMove);
+		/*float hMove = Input.GetAxisRaw("Horizontal");
+		float vMove = Input.GetAxisRaw("Vertical");*/
+		if(Input.GetMouseButtonDown(0)){
+			targetPosition = mapPathfinder.GetTargetPosition(Input.mousePosition);
+			Debug.Log(Input.mousePosition);
+			Debug.Log("Touch :"+targetPosition);
+		}
+		/*newPosition = new Vector3(0f,vMove,hMove);
 		newPosition *= speed * Time.deltaTime;
 		
 		if(newPosition.magnitude > 0){
 			Quaternion rotation = Quaternion.FromToRotation(Vector3.forward,newPosition.normalized);
 			transform.rotation = Quaternion.RotateTowards(transform.rotation, rotation, Time.deltaTime * turningRate);
-		}
+		}*/
 		
 	#endif
 		
-		rb.MovePosition(newPosition + rb.position);
+		//rb.MovePosition(newPosition + rb.position);
 		//rb.MoveRotation(Quaternion.Euler(vectorRotation));		
 	}
+	
+	
 	
 	void OnTriggerEnter(Collider other){
 		
