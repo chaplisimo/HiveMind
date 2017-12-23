@@ -33,8 +33,8 @@ public class MapGenerator : MonoBehaviour {
 	}
 
 	void GenerateMap() {
-		map = new int[width,height];
-		msqrs = new int[width,height];
+		map = new int[width+1,height+1];
+		msqrs = new int[width+1,height+1];
 		RandomFillMap();
 
 		//for (int i = 0; i < 5; i ++) {
@@ -52,9 +52,9 @@ public class MapGenerator : MonoBehaviour {
 
 		System.Random pseudoRandom = new System.Random(seed.GetHashCode());
 
-		for (int x = 0; x < width; x ++) {
-			for (int y = 0; y < height; y ++) {
-				if (x == 0 || x == width-1 || y == 0 || y == height -1) {
+		for (int x = 0; x < width+1; x ++) {
+			for (int y = 0; y < height+1; y ++) {
+				if (x == 0 || x == width|| y == 0 || y == height) {
 					map[x,y] = 1;
 				}
 				else {
@@ -65,8 +65,8 @@ public class MapGenerator : MonoBehaviour {
 	}
 
 	void SmoothMap() {
-		for (int x = 0; x < width; x ++) {
-			for (int y = 0; y < height; y ++) {
+		for (int x = 0; x < width+1; x ++) {
+			for (int y = 0; y < height+1; y ++) {
 				int neighbourWallTiles = GetSurroundingWallCount(x,y);
 
 				if (neighbourWallTiles > 4)
@@ -82,7 +82,7 @@ public class MapGenerator : MonoBehaviour {
 		int wallCount = 0;
 		for (int neighbourX = gridX - 1; neighbourX <= gridX + 1; neighbourX ++) {
 			for (int neighbourY = gridY - 1; neighbourY <= gridY + 1; neighbourY ++) {
-				if (neighbourX >= 0 && neighbourX < width && neighbourY >= 0 && neighbourY < height) {
+				if (neighbourX >= 0 && neighbourX <= width && neighbourY >= 0 && neighbourY <= height) {
 					if (neighbourX != gridX || neighbourY != gridY) {
 						wallCount += map[neighbourX,neighbourY];
 					}
@@ -97,8 +97,8 @@ public class MapGenerator : MonoBehaviour {
 	}
 
 	void TriangleMeshes(){
-		for(int i=0; i<width-1; i++){
-			for(int j=0; j<height-1; j++){
+		for(int i=0; i<width; i++){
+			for(int j=0; j<height; j++){
 				GameObject p = Instantiate(prefab ,transform.position  +  new Vector3(resolution * i,resolution * j,0),transform.rotation);
 				switch (msqrs[i,j]){
 					case 0 :  {p.GetComponent<SpriteRenderer>().sprite = marchSquares[0];break;}
@@ -137,8 +137,8 @@ public class MapGenerator : MonoBehaviour {
 	}*/
 	
 	public void MarchSquares(){
-		for(int i=0; i<width-1; i++){
-			for(int j=0; j<height-1; j++){
+		for(int i=0; i<width; i++){
+			for(int j=0; j<height; j++){
 				msqrs[i,j] = GetBinaryWalls(i,j);
 			}
 		}
